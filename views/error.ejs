@@ -1,3 +1,26 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= error.status %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="build/stylesheets/reset.css">
+    <link rel="stylesheet" type="text/css" href="build/stylesheets/error.css">
+</head>
+<body>
+<%if(error.status == 404){%>
+<h1>404 Error</h1>
+<p>抱歉出现错误了...</p>
+<p>没有找到您要访问的网页，原因可能如下：</p>
+<ul>
+    <li>可能网速过慢，或网络中断</li>
+    <li>可能页面已被删除</li>
+    <li>这个网页太受欢迎，太多人在访问</li>
+</ul>
+<a href="/">回到首页</a><%} else{%>
+<h1>500 Error</h1>
+<p>抱歉出现错误了...</p>
+<a href="/">回到首页</a>
+<%}%>
+</body>
+</html>

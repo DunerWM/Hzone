@@ -1,0 +1,24 @@
+@charset "utf-8";
+body{ font: 16px "Microsoft YaHei", "Lucida Grande", Helvetica, Arial, sans-serif;}
+body{
+    color: #797979;
+    line-height: 26px;
+    padding: 50px 10%;
+}
+h1{
+    font-size: 58px;
+    line-height: 140px;
+    color: #ff5d3d;
+    font-family: Arial;
+    font-weight: bold;
+}
+a{
+    text-decoration: underline;
+    color: #797979;
+    font-size: 14px;;
+}
+ul{
+    list-style: disc;
+    padding-left: 30px;
+    padding-top: 10px;
+}

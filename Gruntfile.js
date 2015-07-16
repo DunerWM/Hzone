@@ -10,7 +10,7 @@ module.exports = function(grunt) {
       build: {
         expand : true,
         cwd : 'public/src',
-        src: '**/*.js',
+        src: ['**/*.js', '!**/*.min.js'],
         dest: 'public/build/'
       }
     },
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {
-          'public/build/css/public.css': 'public/src/css/public.scss'
+          'public/build/stylesheets/public.css': 'public/src/stylesheets/public.scss'
         }
       }
     },
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
           {
             expand : true,
             cwd : 'public/src',
-            src : ['**/*.js'],
+            src : ['**/*.js', '!**/*.min.js'],
             dest : 'public/build/'
           }
         ]
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
           {
             expand : true,
             cwd : 'public/build',
-            src : ['**/*.css'],
+            src : ['**/public.css'],
             dest : 'public/src/'
           }
         ]
@@ -72,12 +72,12 @@ module.exports = function(grunt) {
       }
     },
     clean : {
-      all : 'public/build/**/*.js'
+      all : ['public/build/**/*.js', '!public/build/**/*.min.js']
     },
     jshint : {
       debug : {
         files : {
-          src : ['public/src/**/*.js']
+          src : ['public/src/**/*.js', '!public/src/**/*.min.js']
         }
       },
       build : {

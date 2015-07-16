@@ -1,5 +1,14 @@
 var express = require('express');
 var router = express.Router();
+var BlogProvider = require('../service/Blogprovider').BlogProvider;
+
+var blogProvider = new BlogProvider('localhost', 27017);
+
+//var MongoClient = require('mongodb').MongoClient,
+//    assert = require('assert');
+
+//Connection URL
+//var url = 'mongodb://localhost:27017/peng';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -13,7 +22,22 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/mobile', function(req, res, next){
-  res.render('mobile/index', {title: 'Mobile'});
+  blogProvider.findAll(function(error, blogs) {
+    res.render('mobile/index', {
+      title : "blogs",
+      blogs : blogs
+    })
+  })
+  //MongoClient.connect(url, function(err, db) {
+  //  assert.equal(null, err);
+  //  var collection = db.collection('diary');
+  //  collection.find({},{'title':1}).toArray(function(err, docs) {
+  //    console.dir(docs);
+  //    db.close();
+  //    console.log(docs);
+  //    res.render('mobile/index', { title: 'Diary list', docs: docs});
+  //  });
+  //});
 })
 
 module.exports = router;

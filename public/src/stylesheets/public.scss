@@ -1,0 +1,40 @@
+$red : #ff5d3d;
+html,body{
+  width: 100%;
+  height: 100%;
+}
+.main-container{
+  width: 100%;
+  height: 100%;
+}
+h1{
+  font-size: 36px;
+  line-height: 50px;
+}
+.banner{
+  width: 320px;
+  height: 100%;
+  background-image: url("../images/banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+.banner-inner{
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+}
+.banner-inner{
+  .sub-title{
+    font-size: 14px;
+    line-height: 30px;
+    color: #ccc;
+  }
+}
+.content-container{
+  margin-left: 335px;
+}
