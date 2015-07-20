@@ -1,22 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='build/stylesheets/style.css' />
-    <link rel='stylesheet' href='build/stylesheets/reset.css' />
-    <link rel='stylesheet' href='build/stylesheets/public.css' />
-  </head>
-  <body>
-    <div class="main-container">
-        <div class="banner">
-            <div class="banner-inner">
-                <h1>Hzone</h1>
-                <p class="sub-title">蹲在屋檐下看蚂蚁搬家</p>
-            </div>
-        </div>
-        <div class="content-container">
-
+    <link rel='stylesheet' href='build/stylesheets/style.css'/>
+    <link rel='stylesheet' href='build/stylesheets/reset.css'/>
+    <link rel='stylesheet' href='build/stylesheets/public.css'/>
+</head>
+<body>
+<div class="main-container" ng-app>
+    <div class="banner">
+        <div class="banner-inner">
+            <h1>Hzone</h1>
+            <p class="sub-title">蹲在屋檐下看蚂蚁搬家</p>
         </div>
     </div>
-  </body>
+    <div class="content-container">
+        <div class="content-container-right"></div>
+        <div class="content-container-left">
+            <div class="post-area">
+                <p>留下现在的心情，以后共同回忆<span>还可以输入200字</span></sp></p>
+                <textarea name="post-states" id="postStates" cols="50" rows="3" class="post-states"></textarea>
+            </div>
+            <ul class="states-list">
+                <% for(var i = 0; i < blogs.length; i++) { %>
+                <li>
+                    <div class="head-img">
+                        <img src="/build/images/head_default.jpg">
+                    </div>
+                    <div class="state-details">
+                        <p class="blog-title">
+                            <a href="###"><%= blogs[i].doc[0].nick %></a>
+                            <span>&nbsp;发布&nbsp;</span>
+                            <%= blogs[i].blog.title %>
+                        </p>
+                        <div class="inner-content overf-h">
+                            <img src="build/images/content_img_default.jpg" class="content-img">
+                            <p><%= blogs[i].blog.content %></p>
+                        </div>
+                        <div class="state-bar">
+                            <span class="tips">摄影 文艺 生活</span>
+                            <a href="###">评论</a>
+                            <a href="###">分享</a>
+                            <a href="###">赞</a>
+                        </div>
+                    </div>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="build/javascripts/angular.min.js"></script>
+</body>
 </html>
