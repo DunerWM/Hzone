@@ -18,7 +18,6 @@ router.get('/', function (req, res, next) {
         res.end()
     } else {
         blogProvider.findAllBlogs(function (error, blogs) {
-            console.log(blogs);
             res.render('index', {
                 title: "blogs",
                 blogs: blogs
@@ -44,6 +43,18 @@ router.get('/mobile', function (req, res, next) {
     //    res.render('mobile/index', { title: 'Diary list', docs: docs});
     //  });
     //});
+})
+
+router.post('/state/send', function (req, res, next) {
+    var data = req.body;
+    console.log("data***************" + data);
+    blogProvider.save(data, function (error, info) {
+        if (error) {
+            res.send({'message': error});
+        } else {
+            res.send({'infor': info});
+        }
+    })
 })
 
 module.exports = router;

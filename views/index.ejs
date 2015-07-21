@@ -5,9 +5,10 @@
     <link rel='stylesheet' href='build/stylesheets/style.css'/>
     <link rel='stylesheet' href='build/stylesheets/reset.css'/>
     <link rel='stylesheet' href='build/stylesheets/public.css'/>
+    <script src="build/javascripts/angular.min.js"></script>
 </head>
 <body>
-<div class="main-container" ng-app>
+<div class="main-container" ng-app="myapp">
     <div class="banner">
         <div class="banner-inner">
             <h1>Hzone</h1>
@@ -17,9 +18,17 @@
     <div class="content-container">
         <div class="content-container-right"></div>
         <div class="content-container-left">
-            <div class="post-area">
-                <p>留下现在的心情，以后共同回忆<span>还可以输入200字</span></sp></p>
-                <textarea name="post-states" id="postStates" cols="50" rows="3" class="post-states"></textarea>
+            <div class="post-area" ng-controller="stateFormCtrl">
+                <p><img src="build/images/font.png"><span>还可以输入200字</span></p>
+                <form name="postStateForm">
+                    <textarea id="postStates" cols="50" rows="3" class="post-states" ng-model="state.content" name="state.content"></textarea>
+                </form>
+                <div class="tools-bar">
+                    <a href="###" class="tool-emotion">表情</a>
+                    <a href="###" class="tool-image">照片</a>
+                    <a href="###" class="tool-article">博客</a>
+                    <a class="state-submit" ng-click="stateSubmit()">发布</a>
+                </div>
             </div>
             <ul class="states-list">
                 <% for(var i = 0; i < blogs.length; i++) { %>
@@ -50,6 +59,6 @@
         </div>
     </div>
 </div>
-<script src="build/javascripts/angular.min.js"></script>
+<script src="build/javascripts/index.js"></script>
 </body>
 </html>

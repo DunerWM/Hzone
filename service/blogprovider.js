@@ -16,8 +16,8 @@ BlogProvider.prototype.getCollectionBlog = function (callback) {
             callback(error);
         } else {
             callback(null, blog_collection);
-            this.db.close();
         }
+        this.db.close();
     })
 }
 
@@ -27,26 +27,11 @@ BlogProvider.prototype.getCollectionUser = function (callback) {
             callback(error);
         } else {
             callback(null, user_collection);
-            this.db.close();
         }
+        this.db.close();
     })
 }
 
-BlogProvider.prototype.findAll = function (callback) {
-    this.getCollectionBlog(function (error, blog_collectoon) {
-        if (error) {
-            callback(error);
-        } else {
-            blog_collectoon.find().toArray(function (error, results) {
-                if (error) {
-                    callback(error);
-                } else {
-                    callback(null, results);
-                }
-            })
-        }
-    })
-}
 
 BlogProvider.prototype.save = function (blogs, callback) {
     this.getCollectionBlog(function (error, blog_colection) {
@@ -82,7 +67,7 @@ BlogProvider.prototype.findAllBlogs = function (callback) {
                     }
                     var docs = [];
                     for (var i = 0; i < results.length; i++) {
-                        (function(resultObj, i) {
+                        (function (resultObj, i) {
                             db.collection("user", function (error, user_collection) {
                                 if (error) {
                                     callback(error);
@@ -92,7 +77,7 @@ BlogProvider.prototype.findAllBlogs = function (callback) {
                                             callback(error);
                                         } else {
                                             docs.push({"doc": doc, "blog": resultObj});
-                                            if(i == results.length-1) {
+                                            if (i == results.length - 1) {
                                                 callback(null, docs);
                                             }
                                         }
