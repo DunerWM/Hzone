@@ -57,4 +57,10 @@ router.post('/state/send', function (req, res, next) {
     })
 })
 
+router.get('/template/emotions', function(req, res, next) {
+    res.render('template/emotions', {
+
+    })
+})
+
 module.exports = router;

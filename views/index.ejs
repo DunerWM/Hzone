@@ -29,6 +29,7 @@
                     <a href="###" class="tool-article">博客</a>
                     <a class="state-submit" ng-click="stateSubmit()">发布</a>
                 </div>
+                <div class="emotions-frame" state-emotions ng-class=""></div>
             </div>
             <ul class="states-list">
                 <% for(var i = 0; i < blogs.length; i++) { %>
@@ -59,6 +60,7 @@
         </div>
     </div>
 </div>
+<script src="build/javascripts/emojify.min.js"></script>
 <script src="build/javascripts/index.js"></script>
 </body>
 </html>

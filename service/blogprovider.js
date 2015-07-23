@@ -93,3 +93,9 @@ BlogProvider.prototype.findAllBlogs = function (callback) {
 }
 
 exports.BlogProvider = BlogProvider;
+var str = "1234567890123456789012345abcdefg";
+var strs = [];
+for(var i = 0; i < str.length; i+=20) {
+    var _str = str.substr(i, 20);
+    strs.push(_str);
+}

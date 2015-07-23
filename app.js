@@ -9,9 +9,9 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 //session
-var settings = require('./settings')
-var session = require('express-session');
-var MongoStore = require('connect-mongo');
+//var settings = require('./settings')
+//var session = require('express-session');
+//var MongoStore = require('connect-mongo')(session);
 
 var app = express();
 
@@ -30,16 +30,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-app.use(session({
-    secret: settings.cookieSecret,
-    key: settings.db,
-    cokkie: {maxAge: 1000 * 60 * 60 * 24 * 30},
-    store: new MongoStore({
-        db: settings.db,
-        host: settings.host,
-        port: settings.port
-    })
-}))
+//app.use(session({
+//    secret: settings.cookieSecret,
+//    key: settings.db,
+//    cokkie: {maxAge: 1000 * 60 * 60 * 24 * 30},
+//    store: new MongoStore({
+//        db: settings.db,
+//        host: settings.host,
+//        port: settings.port
+//    })
+//}))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
