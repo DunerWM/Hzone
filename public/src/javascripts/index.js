@@ -3,11 +3,14 @@ globalM.controller('stateFormCtrl', function ($scope, $http) {
     $scope.state = {
         content: null
     };
+    $scope.tabId = null;
     $scope.stateSubmit = function () {
         $http({
             method: 'post',
             url: '/state/send',
-            data: $scope.state,
+            data: {
+                "content" : $scope.state
+            },
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function (data) {
             if (data.success) {
@@ -16,6 +19,16 @@ globalM.controller('stateFormCtrl', function ($scope, $http) {
                 console.log(data.message);
             }
         });
+    };
+
+    $scope.changeTabIdEmotion = function() {
+        $scope.tabId = "emotion";
+    };
+    $scope.changeTabIdPhoto = function() {
+        $scope.tabId = "photo";
+    };
+    $scope.changeTabIdBlog = function() {
+        $scope.tabId = "blog";
     };
 });
 globalM.directive('stateEmotions', function () {
@@ -99,7 +112,6 @@ function textareaInput(str) {
 }
 
 function changeTab(_id) {
-    console.log(_id);
     var emotionsLists = document.querySelectorAll(".emotions-list");
     for(var i = 0; i < emotionsLists.length; i++) {
         emotionsLists[i].style.display = "none";

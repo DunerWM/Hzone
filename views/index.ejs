@@ -16,36 +16,52 @@
         </div>
     </div>
     <div class="content-container">
-        <div class="content-container-right"></div>
+        <div class="content-container-right">
+            <div class="user-section">
+                <% if (user.name) { %>
+                <a href="#" title="<%=user.name%>"><%=user.name%></a>
+                <a href="#" title="登出">登出</a>
+                <% } else { %>
+                <a href="#" title="登录">登录</a>
+                <a href="#" title="注册">注册</a>
+                <% } %>
+            </div>
+
+        </div>
         <div class="content-container-left">
-            <div class="post-area" ng-controller="stateFormCtrl">
+            <div class="post-area" ng-controller="stateFormCtrl" ng-init="tabId = 'null'">
                 <p><img src="build/images/font.png"><span>还可以输入200字</span></p>
                 <form name="postStateForm">
                     <textarea id="postStates" cols="50" rows="3" class="post-states" ng-model="state.content" name="state.content"></textarea>
                 </form>
                 <div class="tools-bar">
-                    <a href="###" class="tool-emotion">表情</a>
-                    <a href="###" class="tool-image">照片</a>
-                    <a href="###" class="tool-article">博客</a>
+                    <a href="###" class="tool-emotion" ng-click="changeTabIdEmotion()">表情</a>
+                    <a href="###" class="tool-image" ng-click="changeTabIdPhoto()">照片</a>
+
+                    <a href="###" class="tool-article" ng-click="changeTabIdBlog()">博客</a>
                     <a class="state-submit" ng-click="stateSubmit()">发布</a>
                 </div>
-                <div class="emotions-frame" state-emotions ng-class=""></div>
+                <div class="state-frame emotions-frame" state-emotions ng-show="tabId == 'emotion'"></div>
+                <div class="state-frame photos-frame" state-photos ng-show="tabId == 'photo'">
+
+                </div>
+                <div class="state-frame blog-frame" state-blog ng-show="tabId == 'blog'"></div>
             </div>
             <ul class="states-list">
-                <% for(var i = 0; i < blogs.length; i++) { %>
+                <% for(var i = 0; i < states.length; i++) { %>
                 <li>
                     <div class="head-img">
                         <img src="/build/images/head_default.jpg">
                     </div>
                     <div class="state-details">
                         <p class="blog-title">
-                            <a href="###"><%= blogs[i].doc[0].nick %></a>
+                            <a href="###"><%= states[i].doc[0].nick %></a>
                             <span>&nbsp;发布&nbsp;</span>
-                            <%= blogs[i].blog.title %>
+                            <%= states[i].blog.content %>
                         </p>
                         <div class="inner-content overf-h">
                             <img src="build/images/content_img_default.jpg" class="content-img">
-                            <p><%= blogs[i].blog.content %></p>
+                            <p><%= states[i].blog.content %></p>
                         </div>
                         <div class="state-bar">
                             <span class="tips">摄影 文艺 生活</span>

@@ -66,6 +66,10 @@ h1 {
   width: 650px;
 }
 
+.content-container-right {
+  float: right;
+}
+
 .post-area {
   padding: 15px;
   background-color: #fff;
@@ -189,32 +193,44 @@ textarea {
   color: #fff;
 }
 
-.emotions-frame {
+.state-frame {
   margin-top: 15px;
   position: absolute;
   background-color: #fff;
   top: 150px;
   left: 0;
-  width: 100%;
   padding: 10px;
   box-sizing: border-box;
   box-shadow: 0 0 3px #aaa;
   border-radius: 2px;
 }
 
-.emotions-frame:before {
+.emotions-frame {
+  width: 100%;
+}
+
+.photos-frame {
+  width: 200px;
+  min-height: 80px;
+}
+
+.state-frame:before {
   content: '';
   height: 0;
   width: 0;
   position: absolute;
   border-style: solid;
   border-width: 0 8px 9px 8px;
-  left: 34px;
+  border-color: transparent transparent #fff transparent;
+  top: -9px;
 }
 
 .emotions-frame:before {
-  border-color: transparent transparent #fff transparent;
-  top: -9px;
+  left: 34px;
+}
+
+.photos-frame:before {
+  left: 150px;
 }
 
 .emotions {
