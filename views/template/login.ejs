@@ -1,0 +1,7 @@
+<form name="loginForm" novalidate>
+    <span ng-if="errorMsg" class="error-message" ng-bind="errorMsg"></span>
+    <input type="text" name="userNick" placeholder="昵称" ng-model="user.nick" required/>
+    <input type="password" name="password" placeholder="密码" ng-model="user.psw" required/>
+    <a ng-if="!user.nick||!user.psw" class="disabled">登&nbsp;录</a>
+    <a ng-if="user.nick && user.psw" ng-click="doLogin()">登&nbsp;录</a>
+</form>

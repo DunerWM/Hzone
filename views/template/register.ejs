@@ -1,0 +1,8 @@
+<form name="registerForm" novalidate>
+    <span ng-if="errorMsg" class="error-message" ng-bind="errorMsg"></span>
+    <input type="text" name="userNick" placeholder="昵称" ng-model="user.nick" required/>
+    <input type="password" name="password" placeholder="密码" ng-model="user.psw" required/>
+    <input type="password" name="repassword" placeholder="确认密码" ng-model="user.repsw" required/>
+    <a ng-if="!user.nick||!user.psw||!user.repsw||user.psw != user.repsw" class="disabled">注&nbsp;册</a>
+    <a ng-if="user.nick && user.psw && user.repsw && user.psw == user.repsw" ng-click="doRegister()">注&nbsp;册</a>
+</form>

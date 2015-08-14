@@ -7,8 +7,8 @@
     <link rel='stylesheet' href='build/stylesheets/public.css'/>
     <script src="build/javascripts/angular.min.js"></script>
 </head>
-<body>
-<div class="main-container" ng-app="myapp">
+<body ng-app="myapp" ng-controller="mainCtrl"  ng-click="hideLoginRegister($event)">
+<div class="main-container">
     <div class="banner">
         <div class="banner-inner">
             <h1>Hzone</h1>
@@ -18,17 +18,14 @@
     <div class="content-container">
         <div class="content-container-right">
             <div class="user-section">
-                <% if (user.name) { %>
+                <% if (user) { %>
                 <a href="#" title="<%=user.name%>"><%=user.name%></a>
                 <a href="#" title="登出">登出</a>
-                <% } else { %>
-                <a href="#" title="登录">登录</a>
-                <a href="#" title="注册">注册</a>
                 <% } %>
             </div>
-
         </div>
         <div class="content-container-left">
+            <% if (user) {%>
             <div class="post-area" ng-controller="stateFormCtrl" ng-init="tabId = 'null'">
                 <p><img src="build/images/font.png"><span>还可以输入200字</span></p>
                 <form name="postStateForm">
@@ -41,12 +38,30 @@
                     <a href="###" class="tool-article" ng-click="changeTabIdBlog()">博客</a>
                     <a class="state-submit" ng-click="stateSubmit()">发布</a>
                 </div>
-                <div class="state-frame emotions-frame" state-emotions ng-show="tabId == 'emotion'"></div>
-                <div class="state-frame photos-frame" state-photos ng-show="tabId == 'photo'">
-
+                <div ng-if="tabId == 'emotion'">
+                    <div class="state-frame emotions-frame" state-emotions></div>
                 </div>
-                <div class="state-frame blog-frame" state-blog ng-show="tabId == 'blog'"></div>
+                <div ng-if="tabId == 'photo'">
+                    <div class="state-frame photos-frame" state-photos></div>
+                </div>
+                <div ng-if="tabId == 'blog'">
+                    <div class="state-frame blog-frame" state-blog></div>
+                </div>
             </div>
+            <% } else { %>
+            <div class="login-regester" ng-controller="loginRegisterCtrl">
+                <a title="登录" ng-click="showLogin($event)">登录</a>后就可以发状态啦~ 我尚需
+                <a href="#" title="注册" ng-click="showRegister($event)">注册1</a>
+                <div class="login-register-container" ng-keyup="escClose($event)" ng-click="stopProp($event)">
+                    <div ng-if="document.showLoginRegister == 'login'" ng-cloak focus-me tabindex="0">
+                        <login class="login-container"></login>
+                    </div>
+                    <div ng-if="document.showLoginRegister == 'register'" ng-cloak focus-me tabindex="0">
+                        <reigster class="register-container"></reigster>
+                    </div>
+                </div>
+            </div>
+            <% } %>
             <ul class="states-list">
                 <% for(var i = 0; i < states.length; i++) { %>
                 <li>

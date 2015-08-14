@@ -63,6 +63,40 @@ globalM.directive('stateEmotions', function () {
     };
 });
 
+globalM.controller('loginRegisterCtrl', function($scope, $http) {
+    $scope.userInfo = {
+        userNick : null,
+        userPassword : null
+    };
+
+    $scope.showLoginRegister = null;
+
+    $scope.login = function() {
+
+    };
+
+    $scope.escClose = function($event) {
+        if($event.keyCode == 27) {
+            $scope.showLoginRegister = false;
+        }
+    };
+
+    $scope.showLogin = function() {
+        $scope.showLoginRegister = "login";
+    };
+
+    $scope.showRegister = function() {
+        $scope.showLoginRegister = "register";
+    };
+});
+
+globalM.directive('login', function() {
+    return {
+        restrict: 'A',
+        templateUrl: '/template/login'
+    };
+});
+
 function getCursortPosition (ctrl) {//获取光标位置函数
     var CaretPos = 0;	// IE Support
     if (document.selection) {

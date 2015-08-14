@@ -1,2 +1,154 @@
-/*! Hzone 2015-07-30 */
-function getCursortPosition(a){var b=0;if(document.selection){a.focus();var c=document.selection.createRange();c.moveStart("character",-a.value.length),b=c.text.length}else(a.selectionStart||"0"==a.selectionStart)&&(b=a.selectionStart);return b}function setCaretPosition(a,b){if(a.setSelectionRange)a.focus(),a.setSelectionRange(b,b);else if(a.createTextRange){var c=a.createTextRange();c.collapse(!0),c.moveEnd("character",b),c.moveStart("character",b),c.select()}}function textareaInput(a){var b,c=document.querySelector("#postStates"),d=getCursortPosition(c),e=c.value||"",f="";if(d==e.length)f=e+a,b=f.length;else{var g=e.substring(0,d),h=e.substring(d);f=g+a+h,b=d+a.length}c.value=f,setCaretPosition(c,b)}function changeTab(a){for(var b=document.querySelectorAll(".emotions-list"),c=0;c<b.length;c++)b[c].style.display="none";document.querySelector("#"+a).style.display="block"}var globalM=angular.module("myapp",[]);globalM.controller("stateFormCtrl",function(a,b){a.state={content:null},a.tabId=null,a.stateSubmit=function(){b({method:"post",url:"/state/send",data:{content:a.state},headers:{"Content-Type":"application/x-www-form-urlencoded"}}).success(function(a){console.log(a.success?a:a.message)})},a.changeTabIdEmotion=function(){a.tabId="emotion"},a.changeTabIdPhoto=function(){a.tabId="photo"},a.changeTabIdBlog=function(){a.tabId="blog"}}),globalM.directive("stateEmotions",function(){return{restrict:"A",templateUrl:"/template/emotions",link:function(a,b,c){emojify.setConfig({only_crawl_id:null,img_dir:"build/images/emoji",ignored_tags:{SCRIPT:1,TEXTAREA:1,A:1,PRE:1,CODE:1}}),emojify.run(),b.find("img").bind("click",function(){textareaInput(this.title)}),b.find("a").bind("click",function(){for(var a=document.querySelectorAll(".emotions-bar a"),b=0;b<a.length;b++)a[b].classList.remove("current");this.classList.add("current"),changeTab(this.getAttribute("data-for"))})}}});
+var globalM = angular.module("myapp", []);
+globalM.controller('stateFormCtrl', function ($scope, $http) {
+    $scope.state = {
+        content: null
+    };
+    $scope.tabId = null;
+    $scope.stateSubmit = function () {
+        $http({
+            method: 'post',
+            url: '/state/send',
+            data: {
+                "content" : $scope.state
+            },
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function (data) {
+            if (data.success) {
+                console.log(data);
+            } else {
+                console.log(data.message);
+            }
+        });
+    };
+
+    $scope.changeTabIdEmotion = function() {
+        $scope.tabId = "emotion";
+    };
+    $scope.changeTabIdPhoto = function() {
+        $scope.tabId = "photo";
+    };
+    $scope.changeTabIdBlog = function() {
+        $scope.tabId = "blog";
+    };
+});
+globalM.directive('stateEmotions', function () {
+    return {
+        restrict: 'A',
+        templateUrl: '/template/emotions',
+        link: function (scope, element, attrs) {
+            emojify.setConfig({
+                only_crawl_id: null,            // 限制哪些id使用emoji
+                img_dir: 'build/images/emoji',  // emoji图片目录
+                ignored_tags: {                // 忽略以下元素，1为忽略，null为不忽略
+                    'SCRIPT': 1,
+                    'TEXTAREA': 1,
+                    'A': 1,
+                    'PRE': 1,
+                    'CODE': 1
+                }
+            });
+            emojify.run();
+            element.find('img').bind('click', function() {
+                textareaInput(this.title);
+            });
+            element.find('a').bind('click', function() {
+                var tabs = document.querySelectorAll(".emotions-bar a");
+               for(var i = 0; i < tabs.length; i++) {
+                   tabs[i].classList.remove("current");
+               }
+                this.classList.add("current");
+                changeTab(this.getAttribute("data-for"));
+            });
+        }
+    };
+});
+
+globalM.controller('loginRegisterCtrl', function($scope, $http) {
+    $scope.userInfo = {
+        userNick : null,
+        userPassword : null
+    };
+
+    $scope.showLoginRegister = null;
+
+    $scope.login = function() {
+
+    };
+
+    $scope.escClose = function($event) {
+        if($event.keyCode == 27) {
+            $scope.showLoginRegister = false;
+        }
+    };
+
+    $scope.showLogin = function() {
+        $scope.showLoginRegister = "login";
+    };
+
+    $scope.showRegister = function() {
+        $scope.showLoginRegister = "register";
+    };
+});
+
+globalM.directive('login', function() {
+    return {
+        restrict: 'A',
+        templateUrl: '/template/login'
+    };
+});
+
+function getCursortPosition (ctrl) {//获取光标位置函数
+    var CaretPos = 0;	// IE Support
+    if (document.selection) {
+        ctrl.focus ();
+        var Sel = document.selection.createRange ();
+        Sel.moveStart ('character', -ctrl.value.length);
+        CaretPos = Sel.text.length;
+    }
+    else if (ctrl.selectionStart || ctrl.selectionStart == '0'){
+        CaretPos = ctrl.selectionStart;
+    }
+    return (CaretPos);
+}
+
+function setCaretPosition(ctrl, pos){//设置光标位置函数
+    if(ctrl.setSelectionRange)
+    {
+        ctrl.focus();
+        ctrl.setSelectionRange(pos,pos);
+    }
+    else if (ctrl.createTextRange) {
+        var range = ctrl.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', pos);
+        range.moveStart('character', pos);
+        range.select();
+    }
+}
+
+function textareaInput(str) {
+    var textareaObj = document.querySelector('#postStates');
+    var cursorPosition = getCursortPosition(textareaObj);
+    var textareaValue = textareaObj.value || '';
+    var _textareaValue = "";
+    var _cursorPosition;
+    if(cursorPosition == textareaValue.length) {
+        _textareaValue = textareaValue + str;
+        _cursorPosition = _textareaValue.length;
+    }else{
+        var textareaFront = textareaValue.substring(0,cursorPosition);
+        var textareaEnd = textareaValue.substring(cursorPosition);
+        _textareaValue = textareaFront + str + textareaEnd;
+        _cursorPosition = cursorPosition + str.length;
+    }
+    textareaObj.value = _textareaValue;
+    setCaretPosition(textareaObj, _cursorPosition);
+}
+
+function changeTab(_id) {
+    var emotionsLists = document.querySelectorAll(".emotions-list");
+    for(var i = 0; i < emotionsLists.length; i++) {
+        emotionsLists[i].style.display = "none";
+    }
+    document.querySelector("#"+_id).style.display = "block";
+}

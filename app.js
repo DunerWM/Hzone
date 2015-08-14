@@ -24,17 +24,12 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser("wangmeng"));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', routes);
-app.use('/users', users);
-
+app.use(cookieParser());
 app.use(session({
     secret: settings.cookieSecret,
     key: settings.db,
     cokkie: {maxAge: 1000 * 60 * 60 * 24 * 30},
-    resave: false,
+    resave: true,
     saveUninitialized: true,
     store: new MongoStore({
         db: settings.db,
@@ -42,6 +37,11 @@ app.use(session({
         port: settings.port
     })
 }))
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', routes);
+app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -4,7 +4,18 @@ a {
   text-decoration: none;
   cursor: pointer;
 }
-
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak,
+.ng-hide{
+  display:none !important;
+}
+input{
+  outline: none;
+}
 html, body {
   width: 100%;
   height: 100%;
@@ -266,4 +277,62 @@ textarea {
   vertical-align: middle;
   cursor: pointer;
   padding-bottom: 6px;
+}
+.login-register-container>div{
+  width: 360px;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow:  0px 0px 100px #000;
+  position: fixed;
+  left: 50%;
+  margin-left: -215px;
+  top: 30px;
+  border-radius: 3px;
+  outline: none;
+}
+.login-register-container>div a,
+.login-register-container>div span{
+  display: inline-block;
+  text-align: center;
+  border-radius: 2px;
+}
+.login-register-container>div a{
+  background-color: #00bb9c;
+  color: #fff;
+  border: 1px solid #00bb9c;
+}
+.login-register-container>div span{
+  color: #ff5d3d;
+  text-align: left;
+  position: relative;
+  height: 20px;
+  width: 300px;
+  line-height: 20px;
+  padding: 5px 5px 5px 25px;
+  margin: 5px 0;
+}
+.login-register-container>div span:before{
+  content: '!';
+  height: 20px;
+  width: 20px;
+  border-radius: 10px;
+  background-color: #ff5d3d;
+  color: #fff;
+  text-align: center;
+  line-height: 20px;
+  position: absolute;
+  left: 0;
+}
+.login-register-container>div a.disabled{
+  background-color: #ccc;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+.login-register-container>div input,
+.login-register-container>div a,{
+  height: 20px;
+  width: 346px;
+  line-height: 20px;
+  padding: 5px 5px;
+  margin: 5px 0;
 }
